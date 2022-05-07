@@ -22,8 +22,8 @@
 
   .textarea {
     display: block;
-    width: 700px;
-    height: 200px;
+    width: 900px;
+    height: 300px;
     margin: 100px auto 10px;
     padding: 10px;
     font-size: 18px;
@@ -60,6 +60,7 @@
     border-radius: 5px;
     cursor: pointer;
     justify-content: center;
+    transition: border-radius 0.3s, background-color 0.1s;
 }
 
 .key span {
@@ -88,6 +89,14 @@
 }
 
 .row div:hover {
-    background: #06a364ef;
-    transition: 0.5s;
+    background-color: #06a364ef;
+}
+
+.active {
+    background-color: #aa04ad;
+    border-radius: 30px;
+}
+
+.row div:active {
+    background-color: #aa04ad;
 }
