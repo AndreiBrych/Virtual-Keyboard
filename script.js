@@ -2,12 +2,17 @@ const body = document.querySelector('body');
 const centralizer = document.createElement('div');
 const textarea = document.createElement('textarea');
 const keyboard = document.createElement('div');
+const description = document.createElement('div');
 
 let keyboardRow;
 let textbutton;
 
 centralizer.classList.add('centralizer');
 body.appendChild(centralizer);
+
+description.classList.add('description');
+body.appendChild(description);
+description.innerHTML = 'Клавиатура создана в операционной системе Windows  Для переключение языка комбинация: левые ctrl + alt';
 
 textarea.classList.add('textarea');
 textarea.setAttribute('row', 5);
@@ -24,6 +29,7 @@ for (let i = 0; i < 5; i += 1) {
   keyboardRow.id = `row${i}`;
   keyboard.appendChild(keyboardRow);
 }
+
 let language;
 
 const allRows = document.querySelectorAll('.row');
@@ -271,6 +277,7 @@ const row0 = [{
     shiftCaps: 'Backspace',
   },
 }];
+
 const keysRow0 = document.querySelectorAll('#key0');
 function drawRow0() {
   for (let i = 0; i < keysRow0.length; i += 1) {
@@ -448,6 +455,7 @@ const row1 = [{
     caseUp: 'Del',
   },
 }];
+
 const keysRow1 = document.querySelectorAll('#key1');
 function drawRow1() {
   for (let i = 0; i < keysRow1.length; i += 1) {
@@ -601,6 +609,7 @@ const row2 = [{
     caseUp: 'Enter',
   },
 }];
+
 const keysRow2 = document.querySelectorAll('#key2');
 function drawRow2() {
   for (let i = 0; i < keysRow2.length; i += 1) {
@@ -699,8 +708,8 @@ const row3 = [{
   eng: {
     caps: ',',
     caseDown: ',',
-    caseUp: '<',
-    shiftCaps: '<',
+    caseUp: '˂',
+    shiftCaps: '˂',
   },
   rus: {
     caps: 'Б',
@@ -713,8 +722,8 @@ const row3 = [{
   eng: {
     caps: '.',
     caseDown: '.',
-    caseUp: '>',
-    shiftCaps: '>',
+    caseUp: '˃',
+    shiftCaps: '˃',
   },
   rus: {
     caps: 'Ю',
@@ -758,6 +767,7 @@ const row3 = [{
     caseUp: 'Shift',
   },
 }];
+
 const keysRow3 = document.querySelectorAll('#key3');
 function drawRow3() {
   for (let i = 0; i < keysRow3.length; i += 1) {
@@ -899,8 +909,6 @@ window.addEventListener('keydown', (e) => {
 
       const newStr = text.value.substring(0, position) + char + text.value.substring(position);
       text.value = newStr;
-      // document.getElementById('textarea').value += char;
-      // text.setSelectionRange(position, position);
     }
     e.preventDefault();
   }
@@ -965,111 +973,99 @@ keyboard.addEventListener('mouseup', () => {
   keys.forEach((e) => e.classList.remove('active'));
 });
 
+function drowUppercaseLettersShift() {
+  for (let i = 0; i < keysRow0.length; i += 1) {
+    keysRow0[i].lastChild.innerHTML = row0[i][language].shiftCaps;
+  }
+  for (let i = 0; i < keysRow1.length; i += 1) {
+    keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
+  }
+  for (let i = 0; i < keysRow2.length; i += 1) {
+    keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
+  }
+  for (let i = 0; i < keysRow3.length; i += 1) {
+    keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
+  }
+}
+
+function drowLowercaseLettersShift() {
+  if (keys[29].className === 'key CapsLock _active') {
+    for (let i = 0; i < keysRow0.length; i += 1) {
+      keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+    }
+  } else {
+    for (let i = 0; i < keysRow0.length; i += 1) {
+      keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+    }
+    for (let i = 0; i < keysRow1.length; i += 1) {
+      keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+    }
+    for (let i = 0; i < keysRow2.length; i += 1) {
+      keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+    }
+    for (let i = 0; i < keysRow3.length; i += 1) {
+      keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+    }
+  }
+}
+
 keys.forEach((el) => el.addEventListener('mousedown', () => {
   if (el.className === 'key ShiftLeft' || el.className === 'key ShiftRight') {
     el.classList.add('_active');
-    for (let i = 0; i < keysRow0.length; i += 1) {
-      keysRow0[i].lastChild.innerHTML = row0[i][language].shiftCaps;
-    }
-    for (let i = 0; i < keysRow1.length; i += 1) {
-      keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
-    }
-    for (let i = 0; i < keysRow2.length; i += 1) {
-      keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
-    }
-    for (let i = 0; i < keysRow3.length; i += 1) {
-      keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
-    }
+    drowUppercaseLettersShift();
   }
 }));
 
 keys.forEach((el) => el.addEventListener('mouseup', () => {
   if (el.className === 'key ShiftLeft _active' || el.className === 'key ShiftRight _active') {
     el.classList.remove('_active');
-    if (keys[29].className === 'key CapsLock _active') {
-      for (let i = 0; i < keysRow0.length; i += 1) {
-        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
-      }
-    } else {
-      for (let i = 0; i < keysRow0.length; i += 1) {
-        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow1.length; i += 1) {
-        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow2.length; i += 1) {
-        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow3.length; i += 1) {
-        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
-      }
-    }
+    drowLowercaseLettersShift();
   }
 }));
 
 document.addEventListener('keydown', (event) => {
   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
-    for (let i = 0; i < keysRow0.length; i += 1) {
-      keysRow0[i].lastChild.innerHTML = row0[i][language].shiftCaps;
-    }
-    for (let i = 0; i < keysRow1.length; i += 1) {
-      keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
-    }
-    for (let i = 0; i < keysRow2.length; i += 1) {
-      keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
-    }
-    for (let i = 0; i < keysRow3.length; i += 1) {
-      keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
-    }
+    drowUppercaseLettersShift();
   }
 });
 
 document.addEventListener('keyup', (event) => {
   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
-    if (keys[29].className === 'key CapsLock _active') {
-      for (let i = 0; i < keysRow0.length; i += 1) {
-        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
-      }
-    } else {
-      for (let i = 0; i < keysRow0.length; i += 1) {
-        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow1.length; i += 1) {
-        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow2.length; i += 1) {
-        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow3.length; i += 1) {
-        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
-      }
-    }
+    drowLowercaseLettersShift();
   }
 });
+
+function drowUppercaseLettersCapsLock() {
+  for (let i = 0; i < keysRow1.length; i += 1) {
+    keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
+  }
+  for (let i = 0; i < keysRow2.length; i += 1) {
+    keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
+  }
+  for (let i = 0; i < keysRow3.length; i += 1) {
+    keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
+  }
+}
+
+function drowLowercaseLettersCapsLock() {
+  for (let i = 0; i < keysRow1.length; i += 1) {
+    keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+  }
+  for (let i = 0; i < keysRow2.length; i += 1) {
+    keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+  }
+  for (let i = 0; i < keysRow3.length; i += 1) {
+    keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+  }
+}
 
 document.addEventListener('keydown', (event) => {
   if (event.code === 'CapsLock') {
     keys[29].classList.toggle('_active');
     if (keys[29].className === 'key CapsLock') {
-      for (let i = 0; i < keysRow1.length; i += 1) {
-        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow2.length; i += 1) {
-        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow3.length; i += 1) {
-        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
-      }
+      drowLowercaseLettersCapsLock();
     } else {
-      for (let i = 0; i < keysRow1.length; i += 1) {
-        keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
-      }
-      for (let i = 0; i < keysRow2.length; i += 1) {
-        keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
-      }
-      for (let i = 0; i < keysRow3.length; i += 1) {
-        keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
-      }
+      drowUppercaseLettersCapsLock();
     }
   }
 });
@@ -1078,25 +1074,9 @@ keys.forEach((el) => el.addEventListener('mousedown', () => {
   if (el.className === 'key CapsLock' || el.className === 'key CapsLock _active') {
     el.classList.toggle('_active');
     if (el.className === 'key CapsLock') {
-      for (let i = 0; i < keysRow1.length; i += 1) {
-        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow2.length; i += 1) {
-        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
-      }
-      for (let i = 0; i < keysRow3.length; i += 1) {
-        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
-      }
+      drowLowercaseLettersCapsLock();
     } else {
-      for (let i = 0; i < keysRow1.length; i += 1) {
-        keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
-      }
-      for (let i = 0; i < keysRow2.length; i += 1) {
-        keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
-      }
-      for (let i = 0; i < keysRow3.length; i += 1) {
-        keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
-      }
+      drowUppercaseLettersCapsLock();
     }
   }
 }));

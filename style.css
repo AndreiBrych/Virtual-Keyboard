@@ -105,3 +105,9 @@
     border-radius: 30px;
 }
 
+.description {
+    width: 470px;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 20px;
+}
