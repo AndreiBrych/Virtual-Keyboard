@@ -24,10 +24,17 @@ for (let i = 0; i < 5; i += 1) {
   keyboardRow.id = `row${i}`;
   keyboard.appendChild(keyboardRow);
 }
+let language;
 
 const allRows = document.querySelectorAll('.row');
 
-// eslint-disable-next-line no-restricted-syntax
+if (localStorage.getItem('lang')) {
+  language = localStorage.getItem('lang');
+} else {
+  localStorage.setItem('lang', 'eng');
+  language = 'eng';
+}
+
 for (let i = 0; i < allRows.length; i += 1) {
   if (i === 0) {
     for (let j = 0; j < 14; j += 1) {
@@ -80,7 +87,7 @@ const row0 = [{
     caps: 'Ё',
     caseDown: 'ё',
     caseUp: 'Ё',
-    shiftCaps: 'ё',
+    shiftCaps: 'Ё',
   },
 }, {
   className: 'Digit1',
@@ -251,25 +258,33 @@ const row0 = [{
     shiftCaps: '+',
   },
 }, {
+  systemBtn: 'system',
   className: 'Backspace',
   eng: {
     caseDown: 'Backspace',
     caseUp: 'Backspace',
+    shiftCaps: 'Backspace',
   },
   rus: {
     caseDown: 'Backspace',
     caseUp: 'Backspace',
+    shiftCaps: 'Backspace',
   },
 }];
-
 const keysRow0 = document.querySelectorAll('#key0');
-
-for (let i = 0; i < keysRow0.length; i += 1) {
-  keysRow0[i].lastChild.innerHTML = row0[i].eng.caseDown;
-  keysRow0[i].classList.add(row0[i].className);
+function drawRow0() {
+  for (let i = 0; i < keysRow0.length; i += 1) {
+    keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+    keysRow0[i].classList.add(row0[i].className);
+    if (row0[i].systemBtn) {
+      keysRow0[i].setAttribute('dataset', row0[i].systemBtn);
+    }
+  }
 }
+drawRow0();
 
 const row1 = [{
+  systemBtn: 'system',
   className: 'Tab',
   eng: {
     caseDown: 'Tab',
@@ -422,6 +437,7 @@ const row1 = [{
     shiftCaps: '/',
   },
 }, {
+  systemBtn: 'system',
   className: 'Delete',
   eng: {
     caseDown: 'Del',
@@ -432,15 +448,20 @@ const row1 = [{
     caseUp: 'Del',
   },
 }];
-
 const keysRow1 = document.querySelectorAll('#key1');
-
-for (let i = 0; i < keysRow1.length; i += 1) {
-  keysRow1[i].lastChild.innerHTML = row1[i].eng.caseDown;
-  keysRow1[i].classList.add(row1[i].className);
+function drawRow1() {
+  for (let i = 0; i < keysRow1.length; i += 1) {
+    keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+    keysRow1[i].classList.add(row1[i].className);
+    if (row1[i].systemBtn) {
+      keysRow1[i].setAttribute('dataset', row1[i].systemBtn);
+    }
+  }
 }
+drawRow1();
 
 const row2 = [{
+  systemBtn: 'system',
   className: 'CapsLock',
   eng: {
     caseDown: 'CapsLock',
@@ -569,6 +590,7 @@ const row2 = [{
     shiftCaps: 'э',
   },
 }, {
+  systemBtn: 'system',
   className: 'Enter',
   eng: {
     caseDown: 'Enter',
@@ -579,15 +601,20 @@ const row2 = [{
     caseUp: 'Enter',
   },
 }];
-
 const keysRow2 = document.querySelectorAll('#key2');
-
-for (let i = 0; i < keysRow2.length; i += 1) {
-  keysRow2[i].lastChild.innerHTML = row2[i].eng.caseDown;
-  keysRow2[i].classList.add(row2[i].className);
+function drawRow2() {
+  for (let i = 0; i < keysRow2.length; i += 1) {
+    keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+    keysRow2[i].classList.add(row2[i].className);
+    if (row2[i].systemBtn) {
+      keysRow2[i].setAttribute('dataset', row2[i].systemBtn);
+    }
+  }
 }
+drawRow2();
 
 const row3 = [{
+  systemBtn: 'system',
   className: 'ShiftLeft',
   eng: {
     caseDown: 'Shift',
@@ -712,14 +739,15 @@ const row3 = [{
 }, {
   className: 'ArrowUp',
   eng: {
-    caseDown: '▲',
-    caseUp: '▲',
+    caseDown: '⮝',
+    caseUp: '⮝',
   },
   rus: {
-    caseDown: '▲',
-    caseUp: '▲',
+    caseDown: '⮝',
+    caseUp: '⮝',
   },
 }, {
+  systemBtn: 'system',
   className: 'ShiftRight',
   eng: {
     caseDown: 'Shift',
@@ -730,15 +758,20 @@ const row3 = [{
     caseUp: 'Shift',
   },
 }];
-
 const keysRow3 = document.querySelectorAll('#key3');
-
-for (let i = 0; i < keysRow3.length; i += 1) {
-  keysRow3[i].lastChild.innerHTML = row3[i].eng.caseDown;
-  keysRow3[i].classList.add(row3[i].className);
+function drawRow3() {
+  for (let i = 0; i < keysRow3.length; i += 1) {
+    keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+    keysRow3[i].classList.add(row3[i].className);
+    if (row3[i].systemBtn) {
+      keysRow3[i].setAttribute('dataset', row3[i].systemBtn);
+    }
+  }
 }
+drawRow3();
 
 const row4 = [{
+  systemBtn: 'system',
   className: 'ControlLeft',
   eng: {
     caseDown: 'Ctrl',
@@ -749,6 +782,7 @@ const row4 = [{
     caseUp: 'Ctrl',
   },
 }, {
+  systemBtn: 'system',
   className: 'MetaLeft',
   eng: {
     caseDown: 'Win',
@@ -759,8 +793,8 @@ const row4 = [{
     caseUp: 'Win',
   },
 }, {
+  systemBtn: 'system',
   className: 'AltLeft',
-  /* systemBtn: true, */
   eng: {
     caseDown: 'Alt',
     caseUp: 'Alt',
@@ -780,6 +814,7 @@ const row4 = [{
     caseUp: ' ',
   },
 }, {
+  systemBtn: 'system',
   className: 'AltRight',
   eng: {
     caseDown: 'Alt',
@@ -792,36 +827,36 @@ const row4 = [{
 }, {
   className: 'ArrowLeft',
   eng: {
-    caseDown: '◄',
-    caseUp: '◄',
+    caseDown: '⮜',
+    caseUp: '⮜',
   },
   rus: {
-    caseDown: '◄',
-    caseUp: '◄',
+    caseDown: '⮜',
+    caseUp: '⮜',
   },
 }, {
   className: 'ArrowDown',
   eng: {
-    caseDown: '▼',
-    caseUp: '▼',
+    caseDown: '⮟',
+    caseUp: '⮟',
   },
   rus: {
-    caseDown: '▼',
-    caseUp: '▼',
+    caseDown: '⮟',
+    caseUp: '⮟',
   },
 }, {
   className: 'ArrowRight',
   eng: {
-    caseDown: '►',
-    caseUp: '►',
+    caseDown: '⮞',
+    caseUp: '⮞',
   },
   rus: {
-    caseDown: '►',
-    caseUp: '►',
+    caseDown: '⮞',
+    caseUp: '⮞',
   },
 }, {
+  systemBtn: 'system',
   className: 'ControlRight',
-  /* systemBtn: true, */
   eng: {
     caseDown: 'Ctrl',
     caseUp: 'Ctrl',
@@ -831,51 +866,332 @@ const row4 = [{
     caseUp: 'Ctrl',
   },
 }];
-
 const keysRow4 = document.querySelectorAll('#key4');
-
-for (let i = 0; i < keysRow4.length; i += 1) {
-  keysRow4[i].lastChild.innerHTML = row4[i].eng.caseDown;
-  keysRow4[i].classList.add(row4[i].className);
-/*  if(row4[i].systemBtn){
-    keysRow4[i].classList.add('system');
-  } */
+function drawRow4() {
+  for (let i = 0; i < keysRow4.length; i += 1) {
+    keysRow4[i].lastChild.innerHTML = row4[i][language].caseDown;
+    keysRow4[i].classList.add(row4[i].className);
+    if (row4[i].systemBtn) {
+      keysRow4[i].setAttribute('dataset', row4[i].systemBtn);
+    }
+  }
 }
-
+drawRow4();
 const keys = document.querySelectorAll('.key');
 
-/*
-document.addEventListener('click', (event) => {
-      event.stopPropagation();
-  const char = event.target.innerText;
+document.getElementById('textarea').focus();
+document.onclick = () => {
+  document.getElementById('textarea').focus();
+};
+document.onkeydown = () => {
+  document.getElementById('textarea').focus();
+};
 
-   if(event.classList.contains('system')){
-    document.getElementById('textarea').value += char;
+window.addEventListener('keydown', (e) => {
+  const text = document.getElementById('textarea');
+  const position = text.selectionStart;
+
+  for (let i = 0; i < keys.length; i += 1) {
+    if (`key ${e.code}` === keys[i].className && keys[i].hasAttribute('dataset')) {
+      document.getElementById('textarea').value += '';
+    } else if (`key ${e.code}` === keys[i].className) {
+      const char = keys[i].lastChild.innerHTML;
+
+      const newStr = text.value.substring(0, position) + char + text.value.substring(position);
+      text.value = newStr;
+      // document.getElementById('textarea').value += char;
+      // text.setSelectionRange(position, position);
+    }
+    e.preventDefault();
   }
+});
 
-} , true );
- */
+window.addEventListener('keydown', (e) => {
+  for (let i = 0; i < keys.length; i += 1) {
+    if (`key ${e.code}` === keys[i].className) {
+      if (`key ${e.code}` === 'key CapsLock'
+        || `key ${e.code}` === 'key ShiftRight'
+        || `key ${e.code}` === 'key ShiftLeft') {
+        break;
+      }
+      keys[i].classList.add('active');
+    }
+  }
+});
 
-document.onkeydown = (event) => {
-  document.querySelector(`.key.${event.code}`).classList.add('active');
-  const char = document.querySelector(`.key.${event.code}`).lastChild.innerHTML;
-  document.getElementById('textarea').value += char;
-};
+window.addEventListener('keyup', (e) => {
+  for (let i = 0; i < keys.length; i += 1) {
+    if (`key ${e.code}` === keys[i].className) {
+      if (`key ${e.code}` === 'key CapsLock'
+          || `key ${e.code}` === 'key ShiftRight'
+          || `key ${e.code}` === 'key ShiftLeft') {
+        break;
+      }
+      keys[i].classList.remove('active');
+    }
+    setTimeout(() => {
+      keys[i].classList.remove('active');
+    }, 100);
+  }
+});
 
-document.onkeyup = (event) => {
-  setTimeout(() => {
-    document.querySelector(`.key.${event.code}`).classList.remove('active');
-  }, 20);
-};
+window.addEventListener('keydown', (event) => {
+  if (event.code === 'ShiftLeft') {
+    keys[42].classList.add('_active');
+  } else if (event.code === 'ShiftRight') {
+    keys[54].classList.add('_active');
+  }
+});
+
+window.addEventListener('keyup', (event) => {
+  if (event.code === 'ShiftLeft') {
+    keys[42].classList.remove('_active');
+  } else if (event.code === 'ShiftRight') {
+    keys[54].classList.remove('_active');
+  }
+});
 
 keys.forEach((el) => el.addEventListener('mousedown', () => {
-  el.classList.add('active');
-  const char = el.lastChild.innerHTML;
-  document.getElementById('textarea').value += char;
+  if (el.hasAttribute('dataset')) {
+    document.getElementById('textarea').value += '';
+  } else {
+    el.classList.add('active');
+    const char = el.lastChild.innerHTML;
+    document.getElementById('textarea').value += char;
+  }
+}));
+
+keyboard.addEventListener('mouseup', () => {
+  keys.forEach((e) => e.classList.remove('active'));
+});
+
+keys.forEach((el) => el.addEventListener('mousedown', () => {
+  if (el.className === 'key ShiftLeft' || el.className === 'key ShiftRight') {
+    el.classList.add('_active');
+    for (let i = 0; i < keysRow0.length; i += 1) {
+      keysRow0[i].lastChild.innerHTML = row0[i][language].shiftCaps;
+    }
+    for (let i = 0; i < keysRow1.length; i += 1) {
+      keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
+    }
+    for (let i = 0; i < keysRow2.length; i += 1) {
+      keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
+    }
+    for (let i = 0; i < keysRow3.length; i += 1) {
+      keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
+    }
+  }
 }));
 
 keys.forEach((el) => el.addEventListener('mouseup', () => {
-  setTimeout(() => {
-    el.classList.remove('active');
-  }, 100);
+  if (el.className === 'key ShiftLeft _active' || el.className === 'key ShiftRight _active') {
+    el.classList.remove('_active');
+    if (keys[29].className === 'key CapsLock _active') {
+      for (let i = 0; i < keysRow0.length; i += 1) {
+        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+      }
+    } else {
+      for (let i = 0; i < keysRow0.length; i += 1) {
+        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow1.length; i += 1) {
+        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow2.length; i += 1) {
+        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow3.length; i += 1) {
+        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+      }
+    }
+  }
+}));
+
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    for (let i = 0; i < keysRow0.length; i += 1) {
+      keysRow0[i].lastChild.innerHTML = row0[i][language].shiftCaps;
+    }
+    for (let i = 0; i < keysRow1.length; i += 1) {
+      keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
+    }
+    for (let i = 0; i < keysRow2.length; i += 1) {
+      keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
+    }
+    for (let i = 0; i < keysRow3.length; i += 1) {
+      keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
+    }
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    if (keys[29].className === 'key CapsLock _active') {
+      for (let i = 0; i < keysRow0.length; i += 1) {
+        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+      }
+    } else {
+      for (let i = 0; i < keysRow0.length; i += 1) {
+        keysRow0[i].lastChild.innerHTML = row0[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow1.length; i += 1) {
+        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow2.length; i += 1) {
+        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow3.length; i += 1) {
+        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+      }
+    }
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'CapsLock') {
+    keys[29].classList.toggle('_active');
+    if (keys[29].className === 'key CapsLock') {
+      for (let i = 0; i < keysRow1.length; i += 1) {
+        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow2.length; i += 1) {
+        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow3.length; i += 1) {
+        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+      }
+    } else {
+      for (let i = 0; i < keysRow1.length; i += 1) {
+        keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
+      }
+      for (let i = 0; i < keysRow2.length; i += 1) {
+        keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
+      }
+      for (let i = 0; i < keysRow3.length; i += 1) {
+        keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
+      }
+    }
+  }
+});
+
+keys.forEach((el) => el.addEventListener('mousedown', () => {
+  if (el.className === 'key CapsLock' || el.className === 'key CapsLock _active') {
+    el.classList.toggle('_active');
+    if (el.className === 'key CapsLock') {
+      for (let i = 0; i < keysRow1.length; i += 1) {
+        keysRow1[i].lastChild.innerHTML = row1[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow2.length; i += 1) {
+        keysRow2[i].lastChild.innerHTML = row2[i][language].caseDown;
+      }
+      for (let i = 0; i < keysRow3.length; i += 1) {
+        keysRow3[i].lastChild.innerHTML = row3[i][language].caseDown;
+      }
+    } else {
+      for (let i = 0; i < keysRow1.length; i += 1) {
+        keysRow1[i].lastChild.innerHTML = row1[i][language].caseUp;
+      }
+      for (let i = 0; i < keysRow2.length; i += 1) {
+        keysRow2[i].lastChild.innerHTML = row2[i][language].caseUp;
+      }
+      for (let i = 0; i < keysRow3.length; i += 1) {
+        keysRow3[i].lastChild.innerHTML = row3[i][language].caseUp;
+      }
+    }
+  }
+}));
+
+const text = document.getElementById('textarea');
+
+document.addEventListener('keydown', (event) => {
+  event.preventDefault();
+
+  if (event.code === 'Tab') {
+    textarea.value += '  ';
+  }
+  if (event.code === 'Enter') {
+    textarea.value += '\n';
+  }
+  if (event.code === 'Backspace') {
+    const str = textarea.value;
+    textarea.value = str.slice(0, -1);
+  }
+  if (event.code === 'Delete') {
+    const elem = textarea.selectionStart;
+    const arr = textarea.value.split('');
+    arr.splice(elem, 1);
+
+    text.value = arr.join('');
+    text.setSelectionRange(elem, elem);
+  }
+
+  if (event.code === 'AltLeft' && event.ctrlKey) {
+    if (language === 'eng') {
+      language = 'rus';
+    } else {
+      language = 'eng';
+    }
+
+    localStorage.setItem('lang', language);
+
+    drawRow0();
+    drawRow1();
+    drawRow2();
+    drawRow3();
+    drawRow4();
+  }
+});
+
+keys.forEach((el) => el.addEventListener('mousedown', () => {
+  if (el.className === 'key Tab') {
+    el.classList.add('_active');
+    textarea.value += '  ';
+  }
+  if (el.className === 'key Enter') {
+    el.classList.add('_active');
+    textarea.value += '\n';
+  }
+  if (el.className === 'key Backspace') {
+    const str = textarea.value;
+    textarea.value = str.slice(0, -1);
+    el.classList.add('_active');
+  }
+  if (el.className === 'key Delete') {
+    el.classList.add('_active');
+    const elem = textarea.selectionStart;
+    const arr = textarea.value.split('');
+    arr.splice(elem, 1);
+
+    text.value = arr.join('');
+    text.setSelectionRange(elem, elem);
+  }
+  if (el.className === 'key ControlLeft'
+  || el.className === 'key MetaLeft'
+  || el.className === 'key AltLeft'
+  || el.className === 'key AltRight'
+  || el.className === 'key ControlRight') {
+    el.classList.add('_active');
+  }
+}));
+
+keys.forEach((el) => el.addEventListener('mouseup', () => {
+  if (el.className === 'key Tab _active') {
+    el.classList.remove('_active');
+  }
+  if (el.className === 'key Enter _active') {
+    el.classList.remove('_active');
+  }
+  if (el.className === 'key Backspace _active') {
+    el.classList.remove('_active');
+  }
+  if (el.className === 'key Delete _active') {
+    el.classList.remove('_active');
+  }
+  if (el.className === 'key ControlLeft _active'
+  || el.className === 'key MetaLeft _active'
+  || el.className === 'key AltLeft _active'
+  || el.className === 'key AltRight _active'
+  || el.className === 'key ControlRight _active') {
+    el.classList.remove('_active');
+  }
 }));

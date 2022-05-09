@@ -100,3 +100,8 @@
 .row div:active {
     background-color: #aa04ad;
 }
+._active {
+    background-color: #aa04ad;
+    border-radius: 30px;
+}
+
